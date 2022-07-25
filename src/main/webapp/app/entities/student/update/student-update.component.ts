@@ -7,6 +7,7 @@ import { finalize } from 'rxjs/operators';
 
 import { IStudent, Student } from '../student.model';
 import { StudentService } from '../service/student.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-student-update',
@@ -17,31 +18,43 @@ export class StudentUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    name: [null, [Validators.required]],
-    age: [null, [Validators.required]],
+    name: ['jojo', [Validators.required]],
+    age: [10, [Validators.required]],
   });
 
-  constructor(protected studentService: StudentService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(
+    protected activeModal: NgbActiveModal,
+    protected studentService: StudentService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ student }) => {
       this.updateForm(student);
     });
   }
-
+  cancel(): void {
+    this.activeModal.dismiss();
+  }
   previousState(): void {
-    window.history.back();
+    this.activeModal.dismiss();
+  }
+  save(): void {
+    const student = this.createFromForm();
+    this.subscribeToSaveResponse(this.studentService.create(student));
+    console.log('ad');
   }
 
-  save(): void {
-    this.isSaving = true;
-    const student = this.createFromForm();
-    if (student.id !== undefined) {
-      this.subscribeToSaveResponse(this.studentService.update(student));
-    } else {
-      this.subscribeToSaveResponse(this.studentService.create(student));
-    }
-  }
+  // save(): void {
+  //   this.isSaving = true;
+  //   const student = this.createFromForm();
+  //   if (student.id !== undefined) {
+  //     this.subscribeToSaveResponse(this.studentService.update(student));
+  //   } else {
+  //     this.subscribeToSaveResponse(this.studentService.create(student));
+  //   }
+  // }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IStudent>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({

@@ -8,6 +8,7 @@ import { StudentDeleteDialogComponent } from '../delete/student-delete-dialog.co
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { StudentUpdateComponent } from '../update/student-update.component';
 
 @Component({
   selector: 'jhi-student',
@@ -76,6 +77,17 @@ export class StudentComponent implements OnInit {
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
+        this.loadAll();
+      }
+    });
+  }
+
+  add(): void {
+    const modalRef = this.modalService.open(StudentUpdateComponent, { size: 'lg', backdrop: 'static' });
+    // modalRef.componentInstance.person = person;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      {
         this.loadAll();
       }
     });

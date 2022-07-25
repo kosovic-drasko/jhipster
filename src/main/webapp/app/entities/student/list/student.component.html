@@ -9,12 +9,7 @@
       </button>
       <input type="text" class="form-control" [(ngModel)]="ime" />
       <button class="btn btn-info" (click)="loadAllRxj()">nadji</button>
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-student"
-        [routerLink]="['/student/new']"
-      >
+      <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-student" (click)="add()">
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="jhipsterApp.student.home.createLabel"> Create a new Student </span>
       </button>
