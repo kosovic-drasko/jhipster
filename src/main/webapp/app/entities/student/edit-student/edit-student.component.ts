@@ -28,8 +28,7 @@ export class EditStudentComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
-
-  ngOnInit(): void {
+  loadAll() {
     this.studentService.find(this.user).subscribe({
       next: res => {
         this.students = res.body ?? [];
@@ -37,7 +36,9 @@ export class EditStudentComponent implements OnInit {
     });
     console.log('to je ', this.user);
   }
-
+  ngOnInit(): void {
+    this.loadAll();
+  }
   cancel(): void {
     this.activeModal.dismiss();
   }
