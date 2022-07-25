@@ -22,7 +22,7 @@ export class StudentComponent implements OnInit {
   student_name?: any[];
   ime?: string;
   ukupno?: any;
-  public displayedColumns = ['id', 'name', 'age'];
+  public displayedColumns = ['id', 'name', 'age', 'delete'];
   public dataSource = new MatTableDataSource<IStudent>();
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -86,7 +86,7 @@ export class StudentComponent implements OnInit {
     const modalRef = this.modalService.open(StudentUpdateComponent, { size: 'lg', backdrop: 'static' });
     // modalRef.componentInstance.person = person;
     // unsubscribe not needed because closed completes on modal close
-    modalRef.closed.subscribe(reason => {
+    modalRef.closed.subscribe(() => {
       {
         this.loadAll();
       }
