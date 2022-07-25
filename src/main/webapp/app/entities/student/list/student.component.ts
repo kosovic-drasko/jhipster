@@ -64,7 +64,6 @@ export class StudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAll();
-    console.log('Proba');
   }
 
   trackId(_index: number, item: IStudent): number {
@@ -86,8 +85,8 @@ export class StudentComponent implements OnInit {
     const modalRef = this.modalService.open(StudentUpdateComponent, { size: 'lg', backdrop: 'static' });
     // modalRef.componentInstance.person = person;
     // unsubscribe not needed because closed completes on modal close
-    modalRef.closed.subscribe(() => {
-      {
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'dodato') {
         this.loadAll();
       }
     });

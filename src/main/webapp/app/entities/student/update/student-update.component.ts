@@ -43,7 +43,7 @@ export class StudentUpdateComponent implements OnInit {
   save(): void {
     const student = this.createFromForm();
     this.subscribeToSaveResponse(this.studentService.create(student));
-    console.log('ad');
+    this.activeModal.close('dodato');
   }
 
   // save(): void {
