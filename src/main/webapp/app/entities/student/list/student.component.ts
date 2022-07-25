@@ -93,12 +93,13 @@ export class StudentComponent implements OnInit {
     });
   }
 
-  edit(): void {
+  edit(id: any): void {
     const modalRef = this.modalService.open(EditStudentComponent, { size: 'lg', backdrop: 'static' });
     // modalRef.componentInstance.person = person;
     // unsubscribe not needed because closed completes on modal close
+    modalRef.componentInstance.user = id;
     modalRef.closed.subscribe(reason => {
-      if (reason === 'dodato') {
+      if (reason === 'izmjenjeno') {
         this.loadAll();
       }
     });

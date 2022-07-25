@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { StudentService } from '../service/student.service';
+import { EntityResponseType, StudentService } from '../service/student.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
@@ -15,13 +15,13 @@ import { finalize } from 'rxjs/operators';
 })
 export class EditStudentComponent implements OnInit {
   isSaving = false;
-
+  students?: IStudent | any[];
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
     age: [null, [Validators.required]],
   });
-
+  @Input() public user?: any;
   constructor(
     protected activeModal: NgbActiveModal,
     protected studentService: StudentService,
@@ -30,10 +30,14 @@ export class EditStudentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ student }) => {
-      this.updateForm(student);
+    this.studentService.find(this.user).subscribe({
+      next: res => {
+        this.students = res.body ?? [];
+      },
     });
+    console.log('to je ', this.user);
   }
+
   cancel(): void {
     this.activeModal.dismiss();
   }
@@ -42,8 +46,8 @@ export class EditStudentComponent implements OnInit {
   }
   save(): void {
     const student = this.createFromForm();
-    this.subscribeToSaveResponse(this.studentService.create(student));
-    this.activeModal.close('dodato');
+    this.subscribeToSaveResponse(this.studentService.update(student));
+    this.activeModal.close('izmjenjeno');
   }
 
   // save(): void {
