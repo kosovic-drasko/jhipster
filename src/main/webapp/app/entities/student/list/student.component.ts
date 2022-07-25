@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { StudentUpdateComponent } from '../update/student-update.component';
+import { EditStudentComponent } from '../edit-student/edit-student.component';
 
 @Component({
   selector: 'jhi-student',
@@ -22,7 +23,7 @@ export class StudentComponent implements OnInit {
   student_name?: any[];
   ime?: string;
   ukupno?: any;
-  public displayedColumns = ['id', 'name', 'age', 'delete'];
+  public displayedColumns = ['id', 'name', 'age', 'edit', 'delete'];
   public dataSource = new MatTableDataSource<IStudent>();
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -83,6 +84,17 @@ export class StudentComponent implements OnInit {
 
   add(): void {
     const modalRef = this.modalService.open(StudentUpdateComponent, { size: 'lg', backdrop: 'static' });
+    // modalRef.componentInstance.person = person;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'dodato') {
+        this.loadAll();
+      }
+    });
+  }
+
+  edit(): void {
+    const modalRef = this.modalService.open(EditStudentComponent, { size: 'lg', backdrop: 'static' });
     // modalRef.componentInstance.person = person;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {

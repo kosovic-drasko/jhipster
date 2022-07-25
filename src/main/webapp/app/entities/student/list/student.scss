@@ -1,15 +1,28 @@
+tr.mat-row:hover {
+  background-color: orange;
+}
 tr {
   cursor: pointer;
 }
 table {
   width: 100%;
 }
-tr.mat-row:hover {
-  background-color: lightgrey;
+
+mat-sidenav {
+  height: 500px;
 }
-tr {
-  cursor: pointer;
+.example-events {
+  width: 300px;
+  height: 200px;
+  overflow: auto;
+  border: 1px solid #555;
 }
+
+//mat-button-toggle {
+//  background-color: green;
+//  color: white;
+//}
+
 tr.mat-footer-row {
   font-weight: bold;
 }
@@ -23,20 +36,6 @@ tr mat-row {
 #edit {
   color: green;
 }
-
-.container-search {
-  display: flex;
-
-  justify-content: flex-end;
-}
-.search-item {
-  margin-top: 10px;
-
-  width: 260px;
-}
-
-.mat-paginator-sticky {
-  bottom: 0px;
-  position: sticky;
-  z-index: 10;
+mat-form-field {
+  width: 200px;
 }
