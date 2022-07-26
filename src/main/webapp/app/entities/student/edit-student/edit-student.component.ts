@@ -1,50 +1,78 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { EntityResponseType, StudentService } from '../service/student.service';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { StudentService } from '../service/student.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EMPTY, Observable, of } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { IStudent, Student } from '../student.model';
-import { finalize } from 'rxjs/operators';
+import { finalize, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'jhi-edit-student',
   templateUrl: './edit-student.component.html',
   styleUrls: ['./edit-student.component.scss'],
 })
-export class EditStudentComponent implements OnInit {
+export class EditStudentComponent {
   isSaving = false;
+  editForm: FormGroup;
   students?: IStudent | any[];
-  editForm = this.fb.group({
-    id: [],
-    name: [null, [Validators.required]],
-    age: [null, [Validators.required]],
-  });
-  @Input() public user?: any;
+
+  @Input() public id?: any;
+  @Input() public name?: any;
+  @Input() public age?: any;
+
   constructor(
     protected activeModal: NgbActiveModal,
     protected studentService: StudentService,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
-  ) {}
-  loadAll() {
-    this.studentService.find(this.user).subscribe({
-      next: res => {
-        this.students = res.body ?? [];
-      },
+    protected fb: FormBuilder,
+    protected router: Router
+  ) {
+    this.editForm = this.fb.group({
+      id: [this.id, [Validators.required]],
+      name: [this.name, [Validators.required]],
+      age: [this.age],
     });
-    console.log('to je ', this.user);
   }
-  ngOnInit(): void {
-    this.loadAll();
-  }
+
+  // loadAll():any {
+  //   if (this.user) {
+  //     return this.studentService.find(this.user).pipe(
+  //       mergeMap((student: HttpResponse<Student>) => {
+  //         if (student.body) {
+  //           return of(student.body);
+  //           console.log('to je ', student.body);
+  //         } else {
+  //           this.router.navigate(['404']);
+  //           return EMPTY;
+  //         }
+  //       })
+  //     );
+  //
+  // }
+  // }
+  // loadAll2(): void {
+  //   this.studentService.query(
+  //     {
+  //       'id.in': this.user,
+  //     }
+  //   ).subscribe({
+  //     next: (res: HttpResponse<IStudent[]>) => {
+  //       this.students = res.body ?? [];
+  //       console.log('to je ', this.user);
+  //       console.log('Iz loadAll2',this.students);
+  //     }
+  //   });
+
   cancel(): void {
     this.activeModal.dismiss();
   }
+
   previousState(): void {
     this.activeModal.dismiss();
   }
+
   save(): void {
     const student = this.createFromForm();
     this.subscribeToSaveResponse(this.studentService.update(student));
