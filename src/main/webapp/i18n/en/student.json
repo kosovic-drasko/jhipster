@@ -19,7 +19,8 @@
       },
       "id": "ID",
       "name": "Name",
-      "age": "Age"
+      "age": "Age",
+      "subjects": "Subjects"
     }
   }
 }

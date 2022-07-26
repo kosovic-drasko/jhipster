@@ -22,6 +22,12 @@
         <dd>
           <span>{{ subjects.numberSmestar }}</span>
         </dd>
+        <dt><span jhiTranslate="jhipsterApp.subjects.student">Student</span></dt>
+        <dd>
+          <div *ngIf="subjects.student">
+            <a [routerLink]="['/student', subjects.student?.id, 'view']">{{ subjects.student?.id }}</a>
+          </div>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

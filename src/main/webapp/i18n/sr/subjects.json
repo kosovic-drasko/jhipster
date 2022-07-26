@@ -2,11 +2,11 @@
   "jhipsterApp": {
     "subjects": {
       "home": {
-        "title": "Predmeti",
+        "title": "Subjects",
         "refreshListLabel": "Refresh list",
         "createLabel": "Kreiraj novi Subjects",
         "createOrEditLabel": "Kreirajte ili izmenite Subjects",
-        "notFound": "Nije pronadjen nijedan predmet"
+        "notFound": "No Subjects found"
       },
       "created": "Kreiran je novi Subjects pod nazivom {{ param }}",
       "updated": "Subjects pod nazivom {{ param }} je ažuriran",
@@ -15,11 +15,12 @@
         "question": "Da li ste sigurni da želite da obrišete Subjects pod nazivom {{ id }}?"
       },
       "detail": {
-        "title": "Predmeti"
+        "title": "Subjects"
       },
       "id": "ID",
-      "subjectName": "Naziv Predmeta",
-      "numberSmestar": "Broj Semestara"
+      "subjectName": "Subject Name",
+      "numberSmestar": "Number Smestar",
+      "student": "Student"
     }
   }
 }

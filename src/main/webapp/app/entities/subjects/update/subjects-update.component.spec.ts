@@ -8,6 +8,8 @@ import { of, Subject, from } from 'rxjs';
 
 import { SubjectsService } from '../service/subjects.service';
 import { ISubjects, Subjects } from '../subjects.model';
+import { IStudent } from 'app/entities/student/student.model';
+import { StudentService } from 'app/entities/student/service/student.service';
 
 import { SubjectsUpdateComponent } from './subjects-update.component';
 
@@ -16,6 +18,7 @@ describe('Subjects Management Update Component', () => {
   let fixture: ComponentFixture<SubjectsUpdateComponent>;
   let activatedRoute: ActivatedRoute;
   let subjectsService: SubjectsService;
+  let studentService: StudentService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -37,18 +40,41 @@ describe('Subjects Management Update Component', () => {
     fixture = TestBed.createComponent(SubjectsUpdateComponent);
     activatedRoute = TestBed.inject(ActivatedRoute);
     subjectsService = TestBed.inject(SubjectsService);
+    studentService = TestBed.inject(StudentService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
+    it('Should call Student query and add missing value', () => {
+      const subjects: ISubjects = { id: 456 };
+      const student: IStudent = { id: 32580 };
+      subjects.student = student;
+
+      const studentCollection: IStudent[] = [{ id: 50559 }];
+      jest.spyOn(studentService, 'query').mockReturnValue(of(new HttpResponse({ body: studentCollection })));
+      const additionalStudents = [student];
+      const expectedCollection: IStudent[] = [...additionalStudents, ...studentCollection];
+      jest.spyOn(studentService, 'addStudentToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ subjects });
+      comp.ngOnInit();
+
+      expect(studentService.query).toHaveBeenCalled();
+      expect(studentService.addStudentToCollectionIfMissing).toHaveBeenCalledWith(studentCollection, ...additionalStudents);
+      expect(comp.studentsSharedCollection).toEqual(expectedCollection);
+    });
+
     it('Should update editForm', () => {
       const subjects: ISubjects = { id: 456 };
+      const student: IStudent = { id: 17395 };
+      subjects.student = student;
 
       activatedRoute.data = of({ subjects });
       comp.ngOnInit();
 
       expect(comp.editForm.value).toEqual(expect.objectContaining(subjects));
+      expect(comp.studentsSharedCollection).toContain(student);
     });
   });
 
@@ -113,6 +139,16 @@ describe('Subjects Management Update Component', () => {
       expect(subjectsService.update).toHaveBeenCalledWith(subjects);
       expect(comp.isSaving).toEqual(false);
       expect(comp.previousState).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Tracking relationships identifiers', () => {
+    describe('trackStudentById', () => {
+      it('Should return tracked Student primary key', () => {
+        const entity = { id: 123 };
+        const trackResult = comp.trackStudentById(0, entity);
+        expect(trackResult).toEqual(entity.id);
+      });
     });
   });
 });

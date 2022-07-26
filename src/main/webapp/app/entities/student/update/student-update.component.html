@@ -1,70 +1,57 @@
-<div class="modal-header">
-  <h4 id="jhi-student-heading" data-cy="StudentCreateUpdateHeading" jhiTranslate="jhipsterApp.student.home.createOrEditLabel">
-    Create or edit a Student
-  </h4>
-</div>
-<div class="modal-body">
-  <div class="d-flex justify-content-center">
-    <div class="col-8">
-      <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-        <div>
-          <jhi-alert-error></jhi-alert-error>
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-student-heading" data-cy="StudentCreateUpdateHeading" jhiTranslate="jhipsterApp.student.home.createOrEditLabel">
+        Create or edit a Student
+      </h2>
 
-          <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-            <input
-              type="number"
-              id="field_id"
-              class="form-control"
-              name="id"
-              id="field_id"
-              data-cy="id"
-              formControlName="id"
-              [readonly]="true"
-            />
-          </div>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
 
-          <div class="form-floating">
-            <input type="text" class="form-control" placeholder="Name" name="name" id="field_name" data-cy="name" formControlName="name" />
-            <label class="form-label" jhiTranslate="jhipsterApp.student.name" for="field_name">Name</label>
-            <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-              <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
-                This field is required.
-              </small>
-            </div>
-          </div>
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
 
-          <div class="form-floating">
-            <input type="number" class="form-control" placeholder="Age" name="age" id="field_age" data-cy="age" formControlName="age" />
-            <label class="form-label" jhiTranslate="jhipsterApp.student.age" for="field_age">Age</label>
-            <div *ngIf="editForm.get('age')!.invalid && (editForm.get('age')!.dirty || editForm.get('age')!.touched)">
-              <small class="form-text text-danger" *ngIf="editForm.get('age')?.errors?.required" jhiTranslate="entity.validation.required">
-                This field is required.
-              </small>
-              <small class="form-text text-danger" [hidden]="!editForm.get('age')?.errors?.number" jhiTranslate="entity.validation.number">
-                This field should be a number.
-              </small>
-            </div>
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.student.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
           </div>
         </div>
-        <div class="modal-footer">
-          <div>
-            <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="cancel()">
-              <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-            </button>
 
-            <button
-              type="submit"
-              id="save-entity"
-              data-cy="entityCreateSaveButton"
-              [disabled]="editForm.invalid || isSaving"
-              class="btn btn-primary"
-            >
-              <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-            </button>
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.student.age" for="field_age">Age</label>
+          <input type="number" class="form-control" name="age" id="field_age" data-cy="age" formControlName="age" />
+          <div *ngIf="editForm.get('age')!.invalid && (editForm.get('age')!.dirty || editForm.get('age')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('age')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('age')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
           </div>
         </div>
-      </form>
-    </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
   </div>
 </div>

@@ -19,7 +19,8 @@
       },
       "id": "ID",
       "subjectName": "Subject Name",
-      "numberSmestar": "Number Smestar"
+      "numberSmestar": "Number Smestar",
+      "student": "Student"
     }
   }
 }

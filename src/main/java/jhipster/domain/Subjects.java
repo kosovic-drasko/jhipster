@@ -1,5 +1,6 @@
 package jhipster.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -29,6 +30,10 @@ public class Subjects implements Serializable {
     @NotNull
     @Column(name = "number_smestar", nullable = false)
     private Integer numberSmestar;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "subjects" }, allowSetters = true)
+    private Student student;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -69,6 +74,19 @@ public class Subjects implements Serializable {
 
     public void setNumberSmestar(Integer numberSmestar) {
         this.numberSmestar = numberSmestar;
+    }
+
+    public Student getStudent() {
+        return this.student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Subjects student(Student student) {
+        this.setStudent(student);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

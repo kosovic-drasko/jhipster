@@ -1,0 +1,15 @@
+
+entity Student {
+  name String required
+  age Integer required
+}
+entity Subjects {
+  subjectName String required
+  numberSmestar Integer required
+}
+relationship OneToMany {
+	Student to Subjects{student}
+
+}
+service Student with serviceClass
+filter Student

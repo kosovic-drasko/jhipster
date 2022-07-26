@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import jhipster.IntegrationTest;
 import jhipster.domain.Student;
+import jhipster.domain.Subjects;
 import jhipster.repository.StudentRepository;
 import jhipster.service.criteria.StudentCriteria;
 import org.junit.jupiter.api.BeforeEach;
@@ -380,6 +381,32 @@ class StudentResourceIT {
 
         // Get all the studentList where age is greater than SMALLER_AGE
         defaultStudentShouldBeFound("age.greaterThan=" + SMALLER_AGE);
+    }
+
+    @Test
+    @Transactional
+    void getAllStudentsBySubjectsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        studentRepository.saveAndFlush(student);
+        Subjects subjects;
+        if (TestUtil.findAll(em, Subjects.class).isEmpty()) {
+            subjects = SubjectsResourceIT.createEntity(em);
+            em.persist(subjects);
+            em.flush();
+        } else {
+            subjects = TestUtil.findAll(em, Subjects.class).get(0);
+        }
+        em.persist(subjects);
+        em.flush();
+        student.addSubjects(subjects);
+        studentRepository.saveAndFlush(student);
+        Long subjectsId = subjects.getId();
+
+        // Get all the studentList where subjects equals to subjectsId
+        defaultStudentShouldBeFound("subjectsId.equals=" + subjectsId);
+
+        // Get all the studentList where subjects equals to (subjectsId + 1)
+        defaultStudentShouldNotBeFound("subjectsId.equals=" + (subjectsId + 1));
     }
 
     /**

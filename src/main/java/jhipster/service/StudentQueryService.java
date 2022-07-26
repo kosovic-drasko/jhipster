@@ -91,6 +91,12 @@ public class StudentQueryService extends QueryService<Student> {
             if (criteria.getAge() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getAge(), Student_.age));
             }
+            if (criteria.getSubjectsId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(criteria.getSubjectsId(), root -> root.join(Student_.subjects, JoinType.LEFT).get(Subjects_.id))
+                    );
+            }
         }
         return specification;
     }

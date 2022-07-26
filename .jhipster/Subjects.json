@@ -1,5 +1,9 @@
 {
+  "applications": "*",
   "changelogDate": "20220726090132",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "subjects",
   "fields": [
     {
       "fieldName": "subjectName",
@@ -12,9 +16,18 @@
       "fieldValidateRules": ["required"]
     }
   ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
   "name": "Subjects",
   "pagination": "no",
   "readOnly": false,
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "student",
+      "otherEntityRelationshipName": "subjects",
+      "relationshipName": "student",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "service": "no"
 }

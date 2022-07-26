@@ -32,6 +32,8 @@ public class StudentCriteria implements Serializable, Criteria {
 
     private IntegerFilter age;
 
+    private LongFilter subjectsId;
+
     private Boolean distinct;
 
     public StudentCriteria() {}
@@ -40,6 +42,7 @@ public class StudentCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
         this.age = other.age == null ? null : other.age.copy();
+        this.subjectsId = other.subjectsId == null ? null : other.subjectsId.copy();
         this.distinct = other.distinct;
     }
 
@@ -93,6 +96,21 @@ public class StudentCriteria implements Serializable, Criteria {
         this.age = age;
     }
 
+    public LongFilter getSubjectsId() {
+        return subjectsId;
+    }
+
+    public LongFilter subjectsId() {
+        if (subjectsId == null) {
+            subjectsId = new LongFilter();
+        }
+        return subjectsId;
+    }
+
+    public void setSubjectsId(LongFilter subjectsId) {
+        this.subjectsId = subjectsId;
+    }
+
     public Boolean getDistinct() {
         return distinct;
     }
@@ -114,13 +132,14 @@ public class StudentCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
             Objects.equals(age, that.age) &&
+            Objects.equals(subjectsId, that.subjectsId) &&
             Objects.equals(distinct, that.distinct)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, age, distinct);
+        return Objects.hash(id, name, age, subjectsId, distinct);
     }
 
     // prettier-ignore
@@ -130,6 +149,7 @@ public class StudentCriteria implements Serializable, Criteria {
             (id != null ? "id=" + id + ", " : "") +
             (name != null ? "name=" + name + ", " : "") +
             (age != null ? "age=" + age + ", " : "") +
+            (subjectsId != null ? "subjectsId=" + subjectsId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }
