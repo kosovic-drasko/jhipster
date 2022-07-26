@@ -1,0 +1,20 @@
+{
+  "changelogDate": "20220726090132",
+  "fields": [
+    {
+      "fieldName": "subjectName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "numberSmestar",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Subjects",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}
