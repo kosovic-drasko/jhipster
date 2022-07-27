@@ -1,19 +1,13 @@
 {{ hide }}
 <mat-dialog-content class="mat-typography">
   <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+    <form name="editForm" role="form" novalidate [formGroup]="editForm">
       <h2 id="jhi-subjects-heading" data-cy="SubjectsCreateUpdateHeading" jhiTranslate="jhipsterApp.subjects.home.createOrEditLabel">
         Create or edit a Subjects
       </h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
-
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
-
         <div class="form-floating">
           <input
             placeholder="Naziv Predmeta"
@@ -81,9 +75,8 @@
     </button>
 
     <button
-      [hidden]="!hide"
+      [hidden]="editForm.get('id')!.value == null"
       (click)="save()"
-      type="submit"
       id="save-entity"
       data-cy="entityCreateSaveButton"
       [disabled]="editForm.invalid || isSaving"
@@ -92,9 +85,8 @@
       <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
     </button>
     <button
-      [hidden]="hide"
+      [hidden]="editForm.get('id')!.value !== null"
       (click)="confirmAdd()"
-      type="submit"
       id="add-entity"
       data-cy="entityCreateSaveButton"
       [disabled]="editForm.invalid || isSaving"
