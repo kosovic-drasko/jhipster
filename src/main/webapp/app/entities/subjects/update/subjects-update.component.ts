@@ -41,6 +41,11 @@ export class SubjectsUpdateComponent implements OnInit {
     const postupci = this.createFromForm();
     this.subscribeToSaveResponse(this.subjectsService.update(postupci));
   }
+  public confirmAdd(): void {
+    const postupci = this.createFromForm();
+    this.subscribeToSaveResponse(this.subjectsService.create(postupci));
+    this.dialogRef.close();
+  }
   previousState(): void {
     window.history.back();
   }

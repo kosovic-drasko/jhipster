@@ -12,12 +12,7 @@
       <span jhiTranslate="jhipsterApp.subjects.home.refreshListLabel">Refresh List</span>
     </button>
 
-    <button
-      id="jh-create-entity"
-      data-cy="entityCreateButton"
-      class="btn btn-primary jh-create-entity create-subjects"
-      [routerLink]="['/subjects/new']"
-    >
+    <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-subjects" (click)="add()">
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="jhipsterApp.subjects.home.createLabel"> Create a new Subjects </span>
     </button>

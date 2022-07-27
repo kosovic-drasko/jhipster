@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Subjects</h2>
 <mat-dialog-content class="mat-typography">
   <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+    <form name="editForm" role="form" novalidate (ngSubmit)="confirmAdd()" [formGroup]="editForm">
       <h2 id="jhi-subjects-heading" data-cy="SubjectsCreateUpdateHeading" jhiTranslate="jhipsterApp.subjects.home.createOrEditLabel">
         Create or edit a Subjects
       </h2>
@@ -87,6 +87,16 @@
       class="btn btn-primary"
     >
       <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+    </button>
+    <button
+      (click)="confirmAdd()"
+      type="submit"
+      id="add-entity"
+      data-cy="entityCreateSaveButton"
+      [disabled]="editForm.invalid || isSaving"
+      class="btn btn-info"
+    >
+      <fa-icon icon="add"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Add</span>
     </button>
   </div>
 </mat-dialog-actions>

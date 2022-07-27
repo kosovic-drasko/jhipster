@@ -102,7 +102,15 @@ export class SubjectsComponent implements OnInit {
   trackId(_index: number, item: ISubjects): number {
     return item.id!;
   }
-
+  add(): any {
+    const dialogRef = this.dialog.open(SubjectsUpdateComponent, {
+      data: { Postupci: {} },
+    });
+    dialogRef.afterClosed().subscribe(() => this.loadPage());
+    setTimeout(() => {
+      this.loadPage();
+    }, 1000);
+  }
   delete(subjects: ISubjects): void {
     const modalRef = this.modalService.open(SubjectsDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.subjects = subjects;
