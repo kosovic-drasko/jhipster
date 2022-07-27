@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { StudentService } from '../service/student.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { IStudent, Student } from '../student.model';
-import { finalize, mergeMap } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'jhi-edit-student',

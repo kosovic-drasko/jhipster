@@ -98,10 +98,12 @@ export class SubjectsComponent implements OnInit {
         numberSemestars,
       },
     });
+    dialogRef.afterClosed().subscribe(() => this.loadPage());
+    setTimeout(() => {
+      this.loadPage();
+    }, 1000);
   }
-  trackId(_index: number, item: ISubjects): number {
-    return item.id!;
-  }
+
   add(): any {
     const dialogRef = this.dialog.open(SubjectsUpdateComponent, {
       data: { Postupci: {} },
@@ -121,7 +123,9 @@ export class SubjectsComponent implements OnInit {
       }
     });
   }
-
+  trackId(_index: number, item: ISubjects): number {
+    return item.id!;
+  }
   protected sort(): string[] {
     const result = [this.predicate + ',' + (this.ascending ? ASC : DESC)];
     if (this.predicate !== 'id') {

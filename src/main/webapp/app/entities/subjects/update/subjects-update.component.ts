@@ -1,10 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, pipe } from 'rxjs';
+import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-
 import { ISubjects, Subjects } from '../subjects.model';
 import { SubjectsService } from '../service/subjects.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -13,13 +11,12 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   selector: 'jhi-subjects-update',
   templateUrl: './subjects-update.component.html',
 })
-export class SubjectsUpdateComponent implements OnInit {
+export class SubjectsUpdateComponent {
   isSaving = false;
   editForm: FormGroup;
 
   constructor(
     protected subjectsService: SubjectsService,
-    protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder,
     private dialogRef: MatDialogRef<SubjectsUpdateComponent>,
     @Inject(MAT_DIALOG_DATA)
@@ -31,21 +28,19 @@ export class SubjectsUpdateComponent implements OnInit {
       numberSemestars: [numberSemestars, [Validators.required]],
     });
   }
-  ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ subjects }) => {
-      this.updateForm(subjects);
-    });
-  }
+
   saveSubject(): void {
     this.isSaving = true;
-    const postupci = this.createFromForm();
-    this.subscribeToSaveResponse(this.subjectsService.update(postupci));
+    const subject = this.createFromForm();
+    this.subscribeToSaveResponse(this.subjectsService.update(subject));
   }
+
   public confirmAdd(): void {
-    const postupci = this.createFromForm();
-    this.subscribeToSaveResponse(this.subjectsService.create(postupci));
+    const subject = this.createFromForm();
+    this.subscribeToSaveResponse(this.subjectsService.create(subject));
     this.dialogRef.close();
   }
+
   previousState(): void {
     window.history.back();
   }
