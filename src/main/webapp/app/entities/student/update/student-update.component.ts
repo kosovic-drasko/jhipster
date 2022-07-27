@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-
 import { IStudent, Student } from '../student.model';
 import { StudentService } from '../service/student.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,37 +11,25 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   selector: 'jhi-student-update',
   templateUrl: './student-update.component.html',
 })
-export class StudentUpdateComponent implements OnInit {
+export class StudentUpdateComponent {
   isSaving = false;
 
   editForm = this.fb.group({
     id: [],
-    name: ['jojo', [Validators.required]],
-    age: [10, [Validators.required]],
+    name: [null, [Validators.required]],
+    age: [null, [Validators.required]],
   });
 
-  constructor(
-    protected activeModal: NgbActiveModal,
-    protected studentService: StudentService,
-    protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
-  ) {}
+  constructor(protected activeModal: NgbActiveModal, protected studentService: StudentService, protected fb: FormBuilder) {}
 
-  ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ student }) => {
-      this.updateForm(student);
-    });
-  }
-  cancel(): void {
-    this.activeModal.dismiss();
-  }
   previousState(): void {
     this.activeModal.dismiss();
   }
+
   save(): void {
     const student = this.createFromForm();
     this.subscribeToSaveResponse(this.studentService.create(student));
-    this.activeModal.close('dodato');
+    this.activeModal.close('promjenjeno');
   }
 
   // save(): void {
@@ -63,7 +49,7 @@ export class StudentUpdateComponent implements OnInit {
     });
   }
 
-  protected onSaveSuccess(): void {
+  onSaveSuccess(): void {
     this.previousState();
   }
 

@@ -1,7 +1,7 @@
-<h2 mat-dialog-title>Subjects</h2>
+{{ hide }}
 <mat-dialog-content class="mat-typography">
   <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="confirmAdd()" [formGroup]="editForm">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2 id="jhi-subjects-heading" data-cy="SubjectsCreateUpdateHeading" jhiTranslate="jhipsterApp.subjects.home.createOrEditLabel">
         Create or edit a Subjects
       </h2>
@@ -74,12 +74,13 @@
 
 <mat-dialog-actions align="end">
   <div>
-    <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+    <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="onSaveSuccess()">
       <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
     </button>
 
     <button
-      (click)="saveSubject()"
+      [hidden]="!hide"
+      (click)="save()"
       type="submit"
       id="save-entity"
       data-cy="entityCreateSaveButton"
@@ -89,6 +90,7 @@
       <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
     </button>
     <button
+      [hidden]="hide"
       (click)="confirmAdd()"
       type="submit"
       id="add-entity"
@@ -96,7 +98,7 @@
       [disabled]="editForm.invalid || isSaving"
       class="btn btn-info"
     >
-      <fa-icon icon="add"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Add</span>
+      <fa-icon icon="add"></fa-icon>&nbsp;<span jhiTranslate="entity.action.add">Add</span>
     </button>
   </div>
 </mat-dialog-actions>

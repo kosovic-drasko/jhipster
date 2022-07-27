@@ -14,6 +14,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class SubjectsUpdateComponent {
   isSaving = false;
   editForm: FormGroup;
+  hide?: any;
 
   constructor(
     protected subjectsService: SubjectsService,
@@ -29,20 +30,16 @@ export class SubjectsUpdateComponent {
     });
   }
 
-  saveSubject(): void {
-    this.isSaving = true;
-    const subject = this.createFromForm();
-    this.subscribeToSaveResponse(this.subjectsService.update(subject));
+  ngOnInit(): void {
+    const subjects = this.createFromForm();
+    this.hide = subjects.id;
+    console.log('To je ================>', subjects.id);
   }
 
   public confirmAdd(): void {
     const subject = this.createFromForm();
     this.subscribeToSaveResponse(this.subjectsService.create(subject));
     this.dialogRef.close();
-  }
-
-  previousState(): void {
-    window.history.back();
   }
 
   save(): void {
@@ -62,8 +59,8 @@ export class SubjectsUpdateComponent {
     });
   }
 
-  protected onSaveSuccess(): void {
-    this.previousState();
+  onSaveSuccess(): void {
+    this.dialogRef.close();
   }
 
   protected onSaveError(): void {
@@ -72,14 +69,6 @@ export class SubjectsUpdateComponent {
 
   protected onSaveFinalize(): void {
     this.isSaving = false;
-  }
-
-  protected updateForm(subjects: ISubjects): void {
-    this.editForm.patchValue({
-      id: subjects.id,
-      subjectName: subjects.subjectName,
-      numberSemestars: subjects.numberSemestars,
-    });
   }
 
   protected createFromForm(): ISubjects {
