@@ -1,46 +1,27 @@
 <div>
-  <h4 id="page-heading" data-cy="SubjectsHeading">
-    <mat-form-field>
-      <input matInput [(ngModel)]="imePredmeta" placeholder="Nadji" (keyup)="loadPageByNameSubject()" />
-      <button *ngIf="imePredmeta" matSuffix mat-icon-button aria-label="Clear" (click)="imePredmetaNull()">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-    <!--    <input type="text" class="form-control" [(ngModel)]="imePredmeta" (keyup)="loadPageByNameSubject()" />-->
-    <!--    <div class="input-group">-->
-    <!--      <input class="form-control border-end-0 border rounded-pill" type="text" value="search" id="example-search-input"[(ngModel)]="imePredmeta" (keyup)="loadPageByNameSubject()">-->
-    <!--      <span class="input-group-append">-->
-    <!--                <button class="btn btn-outline-secondary bg-white border-start-0 border rounded-pill ms-n3" type="button" (click)="imePredmetaNull()" (click)="loadPage()">-->
-    <!--                    <i class="fa fa-search"></i>-->
-    <!--                </button>-->
-    <!--            </span>-->
-    <!--    </div>-->
-    <!--    <div >-->
-    <!--      <input class="form-control " type="search" value="search" id="example-search-input" [(ngModel)]="imePredmeta" (keyup)="loadPageByNameSubject()">-->
+  <mat-form-field>
+    <input matInput type="search" [(ngModel)]="imePredmeta" (keyup)="loadPageByNameSubject()" />
+    <mat-icon matPrefix>search</mat-icon>
+    <button *ngIf="imePredmeta" matSuffix mat-icon-button aria-label="Clear" (click)="imePredmetaNull()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+      <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+      <span jhiTranslate="jhipsterApp.subjects.home.refreshListLabel">Refresh List</span>
+    </button>
 
-    <!--              <button class="btn btn-outline-secondary border-left-0 border" type="button" (click)="imePredmetaNull()" (click)="loadPage()">-->
-    <!--                    <i class="fa fa-search"></i>-->
-    <!--              </button>-->
-
-    <!--    </div>-->
-    <!--        <button class="btn btn-info" (keyup)="loadPageByNameSubject()">nadji</button>-->
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="jhipsterApp.subjects.home.refreshListLabel">Refresh List</span>
-      </button>
-
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-subjects"
-        [routerLink]="['/subjects/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="jhipsterApp.subjects.home.createLabel"> Create a new Subjects </span>
-      </button>
-    </div>
-  </h4>
+    <button
+      id="jh-create-entity"
+      data-cy="entityCreateButton"
+      class="btn btn-primary jh-create-entity create-subjects"
+      [routerLink]="['/subjects/new']"
+    >
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="jhipsterApp.subjects.home.createLabel"> Create a new Subjects </span>
+    </button>
+  </div>
 
   <jhi-alert-error></jhi-alert-error>
 
