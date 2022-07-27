@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   selector: 'jhi-subjects-update',
   templateUrl: './subjects-update.component.html',
 })
-export class SubjectsUpdateComponent {
+export class SubjectsUpdateComponent implements OnInit {
   isSaving = false;
   editForm: FormGroup;
   hide?: any;
