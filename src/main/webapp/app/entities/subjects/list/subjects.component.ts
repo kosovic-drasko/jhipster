@@ -9,6 +9,8 @@ import { ISubjects } from '../subjects.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { SubjectsService } from '../service/subjects.service';
 import { SubjectsDeleteDialogComponent } from '../delete/subjects-delete-dialog.component';
+import { SubjectsUpdateComponent } from '../update/subjects-update.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'jhi-subjects',
@@ -27,18 +29,12 @@ export class SubjectsComponent implements OnInit {
   imePredmeta?: string;
 
   constructor(
+    public dialog: MatDialog,
     protected subjectsService: SubjectsService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected modalService: NgbModal
   ) {}
-
-  // getSum(): any {
-  //
-  //
-  //   return (this.ukupno = this.subjects?.map(t => t.numberSemestars).reduce((acc, value) => acc! + value!, 0));
-  //   console.log('Uvecane godine ===========>  ', this.ukupno);
-  // }
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
@@ -94,7 +90,15 @@ export class SubjectsComponent implements OnInit {
   ngOnInit(): void {
     this.handleNavigation();
   }
-
+  edit(id?: number, subjectName?: string, numberSemestars?: number): any {
+    const dialogRef = this.dialog.open(SubjectsUpdateComponent, {
+      data: {
+        id,
+        subjectName,
+        numberSemestars,
+      },
+    });
+  }
   trackId(_index: number, item: ISubjects): number {
     return item.id!;
   }

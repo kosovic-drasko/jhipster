@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import { ISubjects, Subjects } from '../subjects.model';
 import { SubjectsService } from '../service/subjects.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'jhi-subjects-update',
@@ -14,21 +15,32 @@ import { SubjectsService } from '../service/subjects.service';
 })
 export class SubjectsUpdateComponent implements OnInit {
   isSaving = false;
+  editForm: FormGroup;
 
-  editForm = this.fb.group({
-    id: [],
-    subjectName: [null, [Validators.required]],
-    numberSemestars: [null, [Validators.required]],
-  });
-
-  constructor(protected subjectsService: SubjectsService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
-
+  constructor(
+    protected subjectsService: SubjectsService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder,
+    private dialogRef: MatDialogRef<SubjectsUpdateComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    { id, subjectName, numberSemestars }: any
+  ) {
+    this.editForm = this.fb.group({
+      id: [id],
+      subjectName: [subjectName, [Validators.required]],
+      numberSemestars: [numberSemestars, [Validators.required]],
+    });
+  }
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ subjects }) => {
       this.updateForm(subjects);
     });
   }
-
+  saveSubject(): void {
+    this.isSaving = true;
+    const postupci = this.createFromForm();
+    this.subscribeToSaveResponse(this.subjectsService.update(postupci));
+  }
   previousState(): void {
     window.history.back();
   }
