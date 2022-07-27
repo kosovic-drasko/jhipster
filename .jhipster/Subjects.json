@@ -1,0 +1,22 @@
+{
+  "changelogDate": "20220727043817",
+  "dto": "no",
+  "fields": [
+    {
+      "fieldName": "subjectName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "numberSemestars",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Subjects",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

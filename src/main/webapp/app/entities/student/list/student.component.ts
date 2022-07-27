@@ -23,6 +23,7 @@ export class StudentComponent implements OnInit {
   student_name?: any[];
   ime?: string;
   ukupno?: any;
+
   public displayedColumns = ['id', 'name', 'age', 'edit', 'delete'];
   public dataSource = new MatTableDataSource<IStudent>();
   @ViewChild(MatSort) sort!: MatSort;
