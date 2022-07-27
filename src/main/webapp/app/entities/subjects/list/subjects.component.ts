@@ -70,7 +70,7 @@ export class SubjectsComponent implements OnInit {
 
     this.subjectsService
       .query({
-        'subjectName.in': this.imePredmeta,
+        'subjectName.contains': this.imePredmeta,
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
@@ -89,8 +89,7 @@ export class SubjectsComponent implements OnInit {
   }
   imePredmetaNull(): void {
     this.imePredmeta = '';
-
-    this.handleNavigation();
+    this.loadPage();
   }
   ngOnInit(): void {
     this.handleNavigation();
