@@ -10,6 +10,9 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
+import { LoginComponent } from '../../login/login.component';
+import { RegisterComponent } from '../../account/register/register.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'jhi-navbar',
@@ -31,7 +34,8 @@ export class NavbarComponent implements OnInit {
     private sessionStorageService: SessionStorageService,
     private accountService: AccountService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    protected dialog: MatDialog
   ) {
     if (VERSION) {
       this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
@@ -49,7 +53,12 @@ export class NavbarComponent implements OnInit {
       this.account = account;
     });
   }
-
+  addPrijava(): any {
+    this.dialog.open(LoginComponent);
+  }
+  addRegistracija(): any {
+    this.dialog.open(RegisterComponent);
+  }
   changeLanguage(languageKey: string): void {
     this.sessionStorageService.store('locale', languageKey);
     this.translateService.use(languageKey);
