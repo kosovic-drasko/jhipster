@@ -1,7 +1,6 @@
 import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { LoginService } from 'app/login/login.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -60,6 +59,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           if (!this.router.getCurrentNavigation()) {
             // There were no routing during login (eg from navigationToStoredUrl)
             this.router.navigate(['']);
+            this.close();
           }
         },
         error: () => (this.authenticationError = true),
