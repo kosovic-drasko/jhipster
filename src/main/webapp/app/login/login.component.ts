@@ -13,7 +13,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('username', { static: false })
   username!: ElementRef;
-
+  hide = true;
   authenticationError = false;
 
   loginForm = this.fb.group({
