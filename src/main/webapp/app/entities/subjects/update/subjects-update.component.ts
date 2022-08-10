@@ -14,7 +14,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class SubjectsUpdateComponent implements OnInit {
   isSaving = false;
   editForm: FormGroup;
-  hide?: any;
 
   constructor(
     protected subjectsService: SubjectsService,
@@ -31,21 +30,13 @@ export class SubjectsUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const subjects = this.createFromForm();
-    this.hide = subjects.id;
-    console.log('To je ================>', subjects.id);
-  }
-
-  public confirmAdd(): void {
-    const subject = this.createFromForm();
-    this.subscribeToSaveResponse(this.subjectsService.create(subject));
-    this.dialogRef.close();
+    this.createFromForm();
   }
 
   save(): void {
     this.isSaving = true;
     const subjects = this.createFromForm();
-    if (subjects.id !== undefined) {
+    if (subjects.id !== null) {
       this.subscribeToSaveResponse(this.subjectsService.update(subjects));
     } else {
       this.subscribeToSaveResponse(this.subjectsService.create(subjects));

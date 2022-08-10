@@ -85,11 +85,11 @@
     </button>
     <button
       [hidden]="editForm.get('id')!.value !== null"
-      (click)="confirmAdd()"
+      (click)="save()"
       id="add-entity"
       data-cy="entityCreateSaveButton"
       [disabled]="editForm.invalid || isSaving"
-      class="btn btn-info"
+      class="btn btn-primary"
     >
       <fa-icon icon="add"></fa-icon>&nbsp;<span jhiTranslate="entity.action.add">Add</span>
     </button>
