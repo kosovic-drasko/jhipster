@@ -1,0 +1,24 @@
+{
+  "jhipsterApp": {
+    "dialog": {
+      "home": {
+        "title": "Dialogs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Kreiraj novi Dialog",
+        "createOrEditLabel": "Kreirajte ili izmenite Dialog",
+        "notFound": "No Dialogs found"
+      },
+      "created": "Kreiran je novi Dialog pod nazivom {{ param }}",
+      "updated": "Dialog pod nazivom {{ param }} je ažuriran",
+      "deleted": "Dialog pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Dialog pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Dialog"
+      },
+      "id": "ID",
+      "name": "Name"
+    }
+  }
+}

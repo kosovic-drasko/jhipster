@@ -9,6 +9,7 @@
         "main": "Entiteti",
         "student": "Student",
         "subjects": "Subjects",
+        "dialog": "Dialog",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

@@ -1,0 +1,24 @@
+{
+  "jhipsterApp": {
+    "dialog": {
+      "home": {
+        "title": "Dialogs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Dialog",
+        "createOrEditLabel": "Create or edit a Dialog",
+        "notFound": "No Dialogs found"
+      },
+      "created": "A new Dialog is created with identifier {{ param }}",
+      "updated": "A Dialog is updated with identifier {{ param }}",
+      "deleted": "A Dialog is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Dialog {{ id }}?"
+      },
+      "detail": {
+        "title": "Dialog"
+      },
+      "id": "ID",
+      "name": "Name"
+    }
+  }
+}

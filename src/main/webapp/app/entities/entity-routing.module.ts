@@ -14,6 +14,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'jhipsterApp.subjects.home.title' },
         loadChildren: () => import('./subjects/subjects.module').then(m => m.SubjectsModule),
       },
+      {
+        path: 'dialog',
+        data: { pageTitle: 'jhipsterApp.dialog.home.title' },
+        loadChildren: () => import('./dialog/dialog.module').then(m => m.DialogModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],
