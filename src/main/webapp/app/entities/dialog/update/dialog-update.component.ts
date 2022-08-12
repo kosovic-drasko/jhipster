@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -15,26 +15,28 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class DialogUpdateComponent implements OnInit {
   isSaving = false;
+  editForm: FormGroup;
 
   @Input() public dialog: any;
-  editForm = this.fb.group({
-    id: [],
-    name: [],
-  });
+  @Input() public id: any;
+  @Input() public name: any;
 
   constructor(
     protected dialogService: DialogService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder,
     protected activeModal: NgbActiveModal
-  ) {}
+  ) {
+    this.editForm = this.fb.group({
+      id: [],
+      name: [],
+    });
+  }
 
   ngOnInit(): void {
-    // this.activatedRoute.data.subscribe(({ dialog }) => {
-    //   this.updateForm(dialog);
-
-    console.log(this.dialog);
-    // };
+    this.updateForm(this.dialog);
+    const ime = this.name;
+    console.log(ime);
   }
 
   previousState(): void {
@@ -44,7 +46,7 @@ export class DialogUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const dialog = this.createFromForm();
-    if (dialog.id !== null) {
+    if (dialog.id !== undefined) {
       this.subscribeToSaveResponse(this.dialogService.update(dialog));
     } else {
       this.subscribeToSaveResponse(this.dialogService.create(dialog));
@@ -71,9 +73,9 @@ export class DialogUpdateComponent implements OnInit {
   }
 
   protected updateForm(dialog: IDialog): void {
-    this.editForm.patchValue({
-      id: dialog.id,
-      name: dialog.name,
+    this.editForm?.patchValue({
+      id: this.id,
+      name: this.name,
     });
   }
 

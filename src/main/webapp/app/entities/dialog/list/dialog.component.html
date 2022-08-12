@@ -9,12 +9,11 @@
       </button>
 
       <button
-        *ngFor="let dialog of dialogs; trackBy: trackId"
         data-cy="entityTable"
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-dialog"
-        (click)="update(dialog)"
+        (click)="add()"
       >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="jhipsterApp.dialog.home.createLabel"> Create a new Dialog </span>
@@ -52,7 +51,7 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" (click)="update(dialog)" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <button type="submit" (click)="update(dialog.id, dialog.name)" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>

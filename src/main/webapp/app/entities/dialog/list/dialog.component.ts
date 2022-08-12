@@ -48,9 +48,22 @@ export class DialogComponent implements OnInit {
     });
   }
 
-  update(dialog: IDialog): void {
+  update(id: any, name: any): void {
     const modalRef = this.modalService.open(DialogUpdateComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.dialog = this.dialogs;
+    modalRef.componentInstance.id = id;
+    modalRef.componentInstance.name = name;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'deleted') {
+        this.loadAll();
+      }
+    });
+  }
+
+  add(): void {
+    const modalRef = this.modalService.open(DialogUpdateComponent, { size: 'lg', backdrop: 'static' });
+    // modalRef.componentInstance.id = id;
+
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
