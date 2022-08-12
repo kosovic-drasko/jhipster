@@ -41,7 +41,7 @@ export class DialogComponent implements OnInit {
 
   delete(dialog: IDialog): void {
     const modalRef = this.modalService.open(DialogDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.dialog = this.dialogs;
+    modalRef.componentInstance.dialog = dialog;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       this.loadAll();
