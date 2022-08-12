@@ -54,9 +54,7 @@ export class DialogComponent implements OnInit {
     modalRef.componentInstance.name = name;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
-      if (reason === 'deleted') {
-        this.loadAll();
-      }
+      this.loadAll();
     });
   }
 
@@ -66,9 +64,7 @@ export class DialogComponent implements OnInit {
 
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
-      if (reason === 'deleted') {
-        this.loadAll();
-      }
+      this.loadAll();
     });
   }
 }
