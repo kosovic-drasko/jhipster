@@ -23,7 +23,7 @@ export class SubjectsComponent implements OnInit {
   predicate = 'id';
   ascending = true;
   filters: IFilterOptions = new FilterOptions();
-
+  subject?: String = 'math';
   itemsPerPage = ITEMS_PER_PAGE;
   totalItems = 0;
   page = 1;
@@ -112,15 +112,16 @@ export class SubjectsComponent implements OnInit {
     this.isLoading = true;
     const pageToLoad: number = page ?? 1;
     const queryObject: any = {
+      'nameSubject.equals': this.subject,
       page: pageToLoad - 1,
       size: this.itemsPerPage,
       sort: this.getSortQueryParam(predicate, ascending),
     };
-    if (filters?.hasAnyFilterSet()) {
-      filters.filterOptions.forEach(filterOption => {
-        queryObject[filterOption.name] = filterOption.values;
-      });
-    }
+    // if (filters?.hasAnyFilterSet()) {
+    //   filters.filterOptions.forEach(filterOption => {
+    //     queryObject[filterOption.name] = filterOption.values;
+    //   });
+    // }
     return this.subjectsService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
