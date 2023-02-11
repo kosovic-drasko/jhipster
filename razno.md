@@ -7,3 +7,5 @@ $ git config --global user.email johndoe@example.com_
 </dependency>
 
 _"./lib/util/namespace": "./lib/util/namespace.js"_
+
+komi
