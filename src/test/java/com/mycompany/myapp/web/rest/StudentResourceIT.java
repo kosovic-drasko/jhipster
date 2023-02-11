@@ -149,7 +149,7 @@ class StudentResourceIT {
 
     @Test
     @Transactional
-    void putExistingStudent() throws Exception {
+    void putNewStudent() throws Exception {
         // Initialize the database
         studentRepository.saveAndFlush(student);
 

@@ -2,16 +2,17 @@ package com.mycompany.myapp.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * A Student.
+ * A Subjects.
  */
 @Entity
-@Table(name = "student")
+@Table(name = "subjects")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Student implements Serializable {
+public class Subjects implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -20,8 +21,12 @@ public class Student implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @NotNull
+    @Column(name = "name_subject", nullable = false)
+    private String nameSubject;
+
+    @Column(name = "grade")
+    private Integer grade;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -29,7 +34,7 @@ public class Student implements Serializable {
         return this.id;
     }
 
-    public Student id(Long id) {
+    public Subjects id(Long id) {
         this.setId(id);
         return this;
     }
@@ -38,17 +43,30 @@ public class Student implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return this.name;
+    public String getNameSubject() {
+        return this.nameSubject;
     }
 
-    public Student name(String name) {
-        this.setName(name);
+    public Subjects nameSubject(String nameSubject) {
+        this.setNameSubject(nameSubject);
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameSubject(String nameSubject) {
+        this.nameSubject = nameSubject;
+    }
+
+    public Integer getGrade() {
+        return this.grade;
+    }
+
+    public Subjects grade(Integer grade) {
+        this.setGrade(grade);
+        return this;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -58,10 +76,10 @@ public class Student implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Student)) {
+        if (!(o instanceof Subjects)) {
             return false;
         }
-        return id != null && id.equals(((Student) o).id);
+        return id != null && id.equals(((Subjects) o).id);
     }
 
     @Override
@@ -73,9 +91,10 @@ public class Student implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "Student{" +
+        return "Subjects{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
+            ", nameSubject='" + getNameSubject() + "'" +
+            ", grade=" + getGrade() +
             "}";
     }
 }

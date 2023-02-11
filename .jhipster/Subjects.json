@@ -1,0 +1,21 @@
+{
+  "changelogDate": "20230211043121",
+  "dto": "no",
+  "fields": [
+    {
+      "fieldName": "nameSubject",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "grade",
+      "fieldType": "Integer"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Subjects",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}
