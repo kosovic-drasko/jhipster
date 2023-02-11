@@ -1,5 +1,5 @@
-_$ git config --global user.name "John Doe"
-$ git config --global user.email johndoe@example.com_
+_$ git config --global user.name "kosovic-drasko"
+$ git config --global user.email kosovic.drasko@montefarmco.me_
 
 <dependency>
      <groupId>mysql</groupId>
